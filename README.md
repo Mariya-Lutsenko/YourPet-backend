@@ -29,8 +29,3 @@
 - `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
 - `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
 - `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
-
-DB_HOST =mongodb+srv://admin:W3xQmY3GcqT5YFRL@cluster0.9inzhku.mongodb.net/petsSupport?retryWrites=true&w=majority
-PORT=3001
-SECRET_KEY=t:2xd9)SiB($mr:1FMA(59+DLJBE6s
-BASE_URL=http://localhost:3000
