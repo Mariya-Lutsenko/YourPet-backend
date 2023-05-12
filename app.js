@@ -11,8 +11,7 @@ const authRouter = require("./routes/api/auth-routes");
 const noticesRouter = require("./routes/api/notices-routes");
 // const newsRouter = require("./routes/api/news-routes");
 // const servicesRouter = require("./routes/api/services-routes");
-
-// const userRouter = require("./routes/api/notices-routes");
+const userRouter = require("./routes/api/user-routes");
 
 const app = express();
 
@@ -27,8 +26,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRouter);
 // app.use("/api/services", servicesRouter);
 // app.use("/api/news", newsRouter);
+app.use("/api/user", userRouter);
 app.use("/api/notices", noticesRouter);
-// app.use("/api/user", userRouter);
+
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
