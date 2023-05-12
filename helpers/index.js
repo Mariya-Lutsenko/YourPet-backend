@@ -1,7 +1,7 @@
 const HttpError = require("./HttpError");
-const sendEmail = require("./sendEmail");
+const createTokens = require("./createTokens");
 
 module.exports = {
   HttpError,
-  sendEmail,
+  createTokens,
 };
