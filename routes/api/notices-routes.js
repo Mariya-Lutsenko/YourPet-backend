@@ -1,10 +1,6 @@
 const express = require("express");
 
-const {
-  addNoticesToCategory,
-  getNoticesById,
-  getNotices,
-} = require("../../controllers");
+const { notices } = require("../../controllers");
 
 // const {isValidId, authenticate}=require("../../middlewares")
 
@@ -14,9 +10,13 @@ const router = express.Router();
 
 const { schemasNotices } = require("../../models");
 
-// router.post("/", validateBody(schemasNotices.addSchema), addNoticesToCategory);
+router.post(
+  "/",
+  validateBody(schemasNotices.addSchema),
+  notices.addNoticesToCategory
+);
 
-router.get("/", getNotices);
+router.get("/", notices.getNotices);
 
-router.get("/:id", getNoticesById);
+router.get("/:id", notices.getNoticesById);
 module.exports = router;
