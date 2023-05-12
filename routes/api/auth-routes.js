@@ -24,9 +24,9 @@ router.post(
 //   validateBody(schemas.refreshSchema),
 //   ctrlWrapper(ctrl.refresh)
 // );
-// router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
+router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
 
-// router.post("/logout", authenticate, ctrlWrapper(ctrl.logout));
+router.post("/logout", authenticate, ctrlWrapper(ctrl.logout));
 
 // router.patch(
 //   "/avatars",
