@@ -6,7 +6,7 @@ const { handleMongooseError } = require("../utils");
 const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
 const emailRegexp =
   /^(?=.{10,63}$)(([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/;
-const passRegexp = /^(?=.{7,32}$)([0-9A-Za-z])*$/;
+const passRegexp = /^[a-z0-9A-Z_-]+$/;
 const phoneRegexp = /^\+38(0\d{9})$/;
 const dateRegExp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
@@ -21,13 +21,11 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      match: emailRegexp,
       required: [true, "Email is required"],
       unique: true,
     },
     password: {
       type: String,
-      match: passRegexp,
       minlength: 6,
       required: [true, "Password is required"],
     },
