@@ -14,7 +14,7 @@ const router = express.Router();
 
 const { schemasNotices } = require("../../models");
 
-router.post("/", validateBody(schemasNotices.addSchema), addNoticesToCategory);
+// router.post("/", validateBody(schemasNotices.addSchema), addNoticesToCategory);
 
 router.get("/", getNotices);
 
