@@ -7,11 +7,11 @@ const router = express.Router();
 
 //signup
 
-// router.post(
-//   "/register",
-//   validateBody(schemas.registerSchema),
-//   ctrlWrapper(ctrl.register)
-// );
+router.post(
+  "/register",
+  validateBody(schemas.registerSchema),
+  ctrlWrapper(ctrl.register)
+);
 
 // router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
 
