@@ -1,15 +1,9 @@
 const auth = require("./auth");
-const users = require('./users')
-const {
-  addNoticesToCategory,
-  getNoticesById,
-  getNotices,
-} = require("./notices");
+const users = require("./users");
+const notices = require("./notices");
 
 module.exports = {
   auth,
   users,
-  addNoticesToCategory,
-  getNoticesById,
-  getNotices,
+  notices,
 };
