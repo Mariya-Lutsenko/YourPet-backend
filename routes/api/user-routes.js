@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { validateBody, ctrlWrapper } = require("../../utils");
 const { schemas } = require("../../models");
-const { userSchemas } = require("../../models/userSchema");
+const { userSchemas } = require("../../models");
 const { users: controllers } = require("../../controllers");
 const { isValidIdMyPet, authenticate } = require("../../middlewares");
 
