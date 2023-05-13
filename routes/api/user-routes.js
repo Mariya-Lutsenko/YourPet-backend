@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { validateBody, ctrlWrapper } = require("../../utils");
+const { validateBody } = require("../../utils");
 const { schemas } = require("../../models");
 const { userSchemas } = require("../../models");
 const { users: controllers } = require("../../controllers");
-const { isValidIdMyPet, authenticate } = require("../../middlewares");
+const {
+  isValidIdMyPet,
+  authenticate,
+  upload,
+  cloudinaryAddImage,
+} = require("../../middlewares");
 
 // router.get('/', authenticate, controllers.getAllContacts)
 
@@ -22,6 +27,7 @@ router.delete("/:myPetId", isValidIdMyPet, controllers.removeMyPetById);
 router.patch(
   "/",
   authenticate,
+  upload.single("imageURL"),
   validateBody(userSchemas.updateUserSchema),
   controllers.updateUser
 );
