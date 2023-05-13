@@ -3,7 +3,12 @@ const router = express.Router();
 const { validateBody } = require("../../utils");
 const { schemas, userSchemas } = require("../../models");
 const { users: controllers } = require("../../controllers");
-const { isValidIdMyPet, authenticate } = require("../../middlewares");
+const {
+  isValidIdMyPet,
+  authenticate,
+  upload,
+  cloudinaryAddImage,
+} = require("../../middlewares");
 
 // router.get('/', authenticate, controllers.getAllContacts)
 
@@ -15,6 +20,7 @@ router.delete("/:myPetId", authenticate, isValidIdMyPet, controllers.removeMyPet
 router.patch(
   "/",
   authenticate,
+  upload.single("imageURL"),
   validateBody(userSchemas.updateUserSchema),
   controllers.updateUser
 );

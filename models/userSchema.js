@@ -44,7 +44,7 @@ const userSchema = new Schema(
       default: "",
       match: cityRegexp,
     },
-    avatarURL: {
+    imageURL: {
       type: String,
       default:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
@@ -117,7 +117,7 @@ const updateUserSchema = Joi.object({
   birthday: Joi.string().pattern(dateRegExp).optional(),
   phone: Joi.string().pattern(phoneRegexp).optional(),
   city: Joi.string().pattern(cityRegexp).optional(),
-  avatarURL: Joi.string().optional(),
+  imageURL: Joi.string().optional(),
 });
 
 const userSchemas = {
