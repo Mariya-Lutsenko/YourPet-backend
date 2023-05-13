@@ -8,6 +8,10 @@ const dateRegexp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 const sexOptions = ["male", "female"];
 
+const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+const breedRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+const cityRegexp = /^([A-Za-z]+)*$/;
+
 const noticesSchema = new Schema(
   {
     title: {
@@ -25,6 +29,7 @@ const noticesSchema = new Schema(
     name: {
       type: String,
       required: [true, "Set title for notices"],
+      match: nameRegexp,
       minLength: 2,
       maxLength: 16,
     },
@@ -36,13 +41,40 @@ const noticesSchema = new Schema(
     breed: {
       type: String,
       required: [true, "Set breed for notices"],
+      match: breedRegexp,
       minLength: 2,
       maxLength: 16,
     },
+    // якщо файл передається як URL
     file: {
       type: String,
       required: [true, "Set file for notices"],
     },
+    // якщо завантажуємо картинку
+    // image: {
+    //   type: Buffer,
+    //   required: true,
+    //   validate: {
+    //     validator: function (value) {
+    //       // Перевірка розміру файлу
+    //       if (value && value.length > 3 * 1024 * 1024) {
+    //         return false;
+    //       }
+
+    //       // Перевірка типу файлу
+    //       if (
+    //         value &&
+    //         !["image/jpeg", "image/png"].includes(getFileType(value))
+    //       ) {
+    //         return false;
+    //       }
+
+    //       return true;
+    //     },
+    //     message: "Розмір файлу має бути до 3 МБ",
+    //   },
+    // },
+
     sex: {
       type: String,
       enum: sexOptions,
@@ -50,6 +82,7 @@ const noticesSchema = new Schema(
     },
     location: {
       type: String,
+      match: cityRegexp,
       required: [true, "Set location for notices"],
       minLength: 2,
       maxLength: 50,
@@ -64,12 +97,12 @@ const noticesSchema = new Schema(
       minLength: 8,
       maxLength: 120,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
-  //   owner: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "user",
-  //     required: true,
-  //   },
+
   { versionKey: false }
 );
 
@@ -83,12 +116,12 @@ const addSchema = Joi.object({
   category: Joi.string()
     .valid(...categories)
     .required(),
-  name: Joi.string().min(2).max(16).required().messages({
+  name: Joi.string().pattern(nameRegexp).min(2).max(16).required().messages({
     "any.required": `missing required "name"`,
     "string.empty": `"name" cannot be empty`,
   }),
   date: Joi.string().pattern(dateRegexp).required(),
-  breed: Joi.string().min(2).max(16).required().messages({
+  breed: Joi.string().pattern(breedRegexp).min(2).max(16).required().messages({
     "any.required": `missing required "breed"`,
     "string.empty": `"breed" cannot be empty`,
   }),
@@ -99,11 +132,20 @@ const addSchema = Joi.object({
   sex: Joi.string()
     .valid(...sexOptions)
     .required(),
-  location: Joi.string().min(2).max(50).required().messages({
-    "any.required": `missing required "location"`,
-    "string.empty": `"location" cannot be empty`,
+  location: Joi.string()
+    .pattern(cityRegexp)
+    .min(2)
+    .max(50)
+    .required()
+    .messages({
+      "any.required": `missing required "location"`,
+      "string.empty": `"location" cannot be empty`,
+    }),
+  price: Joi.number().min(0).when("category", {
+    is: "sell",
+    then: Joi.required(),
+    otherwise: Joi.optional(),
   }),
-  price: Joi.number().min(0),
 
   comments: Joi.string().min(8).max(120),
 });
