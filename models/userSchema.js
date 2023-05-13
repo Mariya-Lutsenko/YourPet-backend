@@ -78,9 +78,14 @@ const loginSchema = Joi.object({
   password: Joi.string().pattern(passRegexp).min(6).max(32).required(),
 });
 
+const refreshSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});
+
 const schemas = {
   registerSchema,
   loginSchema,
+  refreshSchema,
 };
 
 const User = model("user", userSchema);
