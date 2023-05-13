@@ -82,15 +82,25 @@ const refreshSchema = Joi.object({
   refreshToken: Joi.string().required(),
 });
 
-const schemas = {
+const updateUserSchema = Joi.object({
+  name: Joi.string().min(1).pattern(nameRegexp).optional(),
+  email: Joi.string().pattern(emailRegexp).min(10).max(63).optional(),
+  birthday: Joi.string().pattern(dateRegExp).optional(),
+  phone: Joi.string().pattern(phoneRegexp).optional(),
+  city: Joi.string().pattern(cityRegexp).optional(),
+  avatarURL: Joi.string().optional(),
+});
+
+const userSchemas = {
   registerSchema,
   loginSchema,
   refreshSchema,
+  updateUserSchema,
 };
 
 const User = model("user", userSchema);
 
 module.exports = {
   User,
-  schemas,
+  userSchemas,
 };
