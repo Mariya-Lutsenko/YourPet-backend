@@ -1,5 +1,6 @@
 const { User, userSchemas } = require("./userSchema");
 const { MyPet, schemas } = require("./myPetSchema");
+const { Services } = require("./servicesSchema");
 
 const { Notices, schemasNotices } = require("./noticesSchema");
 
@@ -10,4 +11,5 @@ module.exports = {
   schemas,
   Notices,
   schemasNotices,
+  Services,
 };
