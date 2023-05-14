@@ -12,9 +12,19 @@ const {
 
 // router.get('/', authenticate, controllers.getAllContacts)
 
-router.post("/user/pets", authenticate, validateBody(schemas.addMyPetSchema),controllers.addMyPet);
+router.post(
+  "/user/pets",
+  authenticate,
+  validateBody(schemas.addMyPetSchema),
+  controllers.addMyPet
+);
 
-router.delete("/:myPetId", authenticate, isValidIdMyPet, controllers.removeMyPetById);
+router.delete(
+  "/:myPetId",
+  authenticate,
+  isValidIdMyPet,
+  controllers.removeMyPetById
+);
 
 // updating information about users
 router.patch(

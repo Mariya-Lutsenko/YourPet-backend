@@ -2,14 +2,12 @@ const express = require("express");
 
 const { notices } = require("../../controllers");
 
-// const {isValidId, authenticate}=require("../../middlewares")
-
 const { validateBody } = require("../../utils");
 
 const router = express.Router();
 
 const { schemasNotices } = require("../../models");
-const { authenticate, upload } = require("../../middlewares");
+const { authenticate, upload, isValidIdMyPet } = require("../../middlewares");
 
 router.post(
   "/",
@@ -21,5 +19,15 @@ router.post(
 
 router.get("/", notices.getNotices);
 
-router.get("/:id", notices.getNoticesById);
+router.get("/:id", isValidIdMyPet, notices.getNoticesById);
+
+router.get("/user/own", authenticate, notices.getAllOwnNotices);
+
+router.delete(
+  "/:id",
+  isValidIdMyPet,
+  authenticate,
+  notices.deleteOwnNoticesById
+);
+
 module.exports = router;
