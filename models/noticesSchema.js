@@ -1,3 +1,4 @@
+const { required } = require("joi");
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 
@@ -45,36 +46,11 @@ const noticesSchema = new Schema(
       minLength: 2,
       maxLength: 16,
     },
-    // якщо файл передається як URL
+
     file: {
       type: String,
       required: [true, "Set file for notices"],
     },
-    // якщо завантажуємо картинку
-    // image: {
-    //   type: Buffer,
-    //   required: true,
-    //   validate: {
-    //     validator: function (value) {
-    //       // Перевірка розміру файлу
-    //       if (value && value.length > 3 * 1024 * 1024) {
-    //         return false;
-    //       }
-
-    //       // Перевірка типу файлу
-    //       if (
-    //         value &&
-    //         !["image/jpeg", "image/png"].includes(getFileType(value))
-    //       ) {
-    //         return false;
-    //       }
-
-    //       return true;
-    //     },
-    //     message: "Розмір файлу має бути до 3 МБ",
-    //   },
-    // },
-
     sex: {
       type: String,
       enum: sexOptions,
@@ -125,8 +101,9 @@ const addSchema = Joi.object({
     "any.required": `missing required "breed"`,
     "string.empty": `"breed" cannot be empty`,
   }),
-  file: Joi.string().required().messages({
-    "any.required": `missing required "file"`,
+
+  file: Joi.string().messages({
+    "any.required": `missing required "photo"`,
     "string.empty": `"file" cannot be empty`,
   }),
   sex: Joi.string()
