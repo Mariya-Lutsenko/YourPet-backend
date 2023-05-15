@@ -1031,25 +1031,30 @@
                   "description": "id",
                   "example": "63b2a1aac7d7c8862b0f594f"
                 },
+                "imageUrl": {
+                  "type": "string",
+                  "description": "New's image",
+                  "example": "https://www.nytimes.com/images/2023/03/12/magazine/12mag-ethicist-online/12mag-ethicist-online-blog480.jpg"
+                },
                 "title": {
                   "type": "string",
                   "description": "title",
-                  "example": "В День ветеринара..."
+                  "example": "What I Learned Dogsitting for New York City’s Opulent Elite"
                 },
                 "url": {
                   "type": "string",
                   "description": "url",
-                  "example": "https://www.kmlvm.com.ua/v-den-veterynara-v-stolytsi-projde-bezkoshtovnyj-trening-z-nadannya-pershoyi-dopomogy-tvarynam/"
+                  "example": "https://www.nytimes.com/2023/04/11/magazine/dogsitting-rich-new-york.html"
                 },
-                "description": {
+                "text": {
                   "type": "string",
-                  "description": "description",
-                  "example": "В неділю, 14 серпня, в Тимчасовому притулку для тварин «ВДНГ» пройде ..."
+                  "description": "text",
+                  "example": "In a city of yawning class inequality..."
                 },
                 "date": {
                   "type": "string",
                   "description": "date",
-                  "example": "2022-08-12"
+                  "example": "2023-03-08T16:30:04+0000"
                 }
               }
             }
@@ -1064,6 +1069,7 @@
           "news": [
             {
               "_id": "63b2a1aac7d7c8862b0f5961",
+              "imageURL": "https://res.cloudinary.com/dzbevpbos/image/upload/v1684146623/y6zpmfjnpfildbmbu6l9.jpg",
               "title": "На Полтавщині запровадять заборону на вилов раків: коли діятиме та чому",
               "url": "https://suspilne.media/270658-na-poltavsini-zaprovadat-zaboronu-na-vilov-rakiv-koli-diatime-ta-comu/",
               "description": "У Полтавській області з 15 серпня починає ...",
