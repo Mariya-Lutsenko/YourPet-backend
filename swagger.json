@@ -993,7 +993,7 @@
                   "description": "id",
                   "example": "63b2a1aac7d7c8862b0f594f"
                 },
-                "imageUrl": {
+                "imgUrl": {
                   "type": "string",
                   "description": "New's image",
                   "example": "https://www.nytimes.com/images/2023/03/12/magazine/12mag-ethicist-online/12mag-ethicist-online-blog480.jpg"
@@ -1002,11 +1002,6 @@
                   "type": "string",
                   "description": "title",
                   "example": "What I Learned Dogsitting for New York City’s Opulent Elite"
-                },
-                "url": {
-                  "type": "string",
-                  "description": "url",
-                  "example": "https://www.nytimes.com/2023/04/11/magazine/dogsitting-rich-new-york.html"
                 },
                 "text": {
                   "type": "string",
@@ -1017,6 +1012,11 @@
                   "type": "string",
                   "description": "date",
                   "example": "2023-03-08T16:30:04+0000"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "url",
+                  "example": "https://www.nytimes.com/2023/04/11/magazine/dogsitting-rich-new-york.html"
                 }
               }
             }
@@ -1031,11 +1031,11 @@
           "news": [
             {
               "_id": "63b2a1aac7d7c8862b0f5961",
-              "imageURL": "https://www.nytimes.com/images/2023/03/12/magazine/12mag-ethicist-online/12mag-ethicist-online-blog480.jpg",
+              "imgUrl": "https://www.nytimes.com/images/2023/03/12/magazine/12mag-ethicist-online/12mag-ethicist-online-blog480.jpg",
               "title": "What I Learned Dogsitting for New York City’s Opulent Elite",
-              "url": "https://www.nytimes.com/2023/04/11/magazine/dogsitting-rich-new-york.html",
               "text": "In a city of yawning class inequality...",
-              "date": "2023-03-08T16:30:04+0000"
+              "date": "2023-03-08T16:30:04+0000",
+              "url": "https://www.nytimes.com/2023/04/11/magazine/dogsitting-rich-new-york.html"
             }
           ],
           "totalPages": 1
