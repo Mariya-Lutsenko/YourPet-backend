@@ -24,7 +24,7 @@ router.delete(
   controllers.removeMyPetById
 );
 
-router.get('/current/info', authenticate, controllers.getAllInfo)
+router.get('/', authenticate, controllers.getAllInfo)
 
 // updating information about users
 router.patch(

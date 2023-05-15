@@ -376,7 +376,7 @@
         }
       }
     },
-    "/current/info": {
+    "/": {
       "get": {
         "tags": ["User"],
         "summary": "Get User's info with his pets",
