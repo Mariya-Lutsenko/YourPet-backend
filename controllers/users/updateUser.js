@@ -1,16 +1,16 @@
-const { User } = require("../../models");
+const { User, userSchemas } = require("../../models");
 const { HttpError } = require("../../helpers");
 const { ctrlWrapper } = require("../../utils");
 const { cloudinaryAddImage } = require("../../middlewares");
 
 const updateUser = async (req, res) => {
-  // const { updateUserSchema } = userSchemas;
-  // const { imageURL, name, email, birthday, phone, city } = req.body;
-  // const { error } = updateUserSchema.validate(req.body);
-  // if (error) {
-  //   error.status = 400;
-  //   throw error;
-  // }
+  const { updateUserSchema } = userSchemas;
+  const { imageURL, name, email, birthday, phone, city } = req.body;
+  const { error } = updateUserSchema.validate(req.body);
+  if (error) {
+    error.status = 400;
+    throw error;
+  }
 
   const { _id } = req.user;
   if (!req.file) {

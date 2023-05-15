@@ -3,7 +3,8 @@ const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const { handleMongooseError } = require("../utils");
 
-const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+// const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+const nameRegexp = /^[a-zA-Z\s]*$/;
 const emailRegexp =
   /^(?=.{10,63}$)(([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/;
 const passRegexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([0-9a-zA-Z]{6,})*$/;
