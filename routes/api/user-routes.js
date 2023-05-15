@@ -18,13 +18,13 @@ router.post(
 );
 
 router.delete(
-  "/:myPetId",
+  "/user/pets/:id",
   authenticate,
   isValidIdMyPet,
   controllers.removeMyPetById
 );
 
-router.get('/', authenticate, controllers.getAllInfo)
+router.get('/current/user/info', authenticate, controllers.getAllInfo)
 
 // updating information about users
 router.patch(

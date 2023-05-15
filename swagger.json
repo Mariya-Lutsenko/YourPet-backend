@@ -290,8 +290,8 @@
     "/user/pets": {
       "post": {
         "tags": ["User"],
-        "summary": "Add User pets",
-        "description": "Add User pets",
+        "summary": "Add User's pet",
+        "description": "Add User's pet",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -307,7 +307,7 @@
         },
         "responses": {
           "201": {
-            "description": "Create",
+            "description": "Create new pet",
             "content": {
               "application/json": {
                 "schema": {
@@ -321,7 +321,7 @@
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized. Please, provide a token",
             "content": {}
           },
           "403": {
@@ -334,13 +334,13 @@
     "/user/pets/{id}": {
       "delete": {
         "tags": ["User"],
-        "summary": "Delete User pets",
-        "description": "Delete User pets",
+        "summary": "Delete User's pet",
+        "description": "Delete User's pet",
         "parameters": [
           {
-            "name": "id",
+            "name": "myPetId",
             "in": "path",
-            "description": "User pets Id",
+            "description": "User's pet id",
             "required": true,
             "type": "string"
           }
@@ -348,7 +348,7 @@
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Saccses",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -362,7 +362,7 @@
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized. Please, provide a token",
             "content": {}
           },
           "403": {
@@ -370,64 +370,26 @@
             "content": {}
           },
           "404": {
-            "description": "failure, pet with id not found",
+            "description": "Failure, pet with ID not found",
             "content": {}
           }
         }
       }
     },
-    "/user": {
+    "/current/user/info": {
       "get": {
         "tags": ["User"],
-        "summary": "Get all user info with his pets",
-        "description": "Get all user info with his pets",
+        "summary": "Get User's info with his pets",
+        "description": "Get User's info with his pets",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Saccses",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetUserInfoResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Not authorized.Please,provide a token",
-            "content": {}
-          },
-          "403": {
-            "description": "Invalid token",
-            "content": {}
-          }
-        }
-      },
-      "patch": {
-        "tags": ["User"],
-        "summary": "Update user info",
-        "description": "Update user info",
-        "parameters": [],
-        "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "User's object",
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Saccses",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUserResponse"
                 }
               }
             }
@@ -437,7 +399,7 @@
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized. Please, provide a token",
             "content": {}
           },
           "403": {
@@ -1179,21 +1141,21 @@
       },
       "AddPetRequest": {
         "type": "object",
-        "required": ["name", "birthday", "breed", "coments", "avatar"],
+        "required": ["name", "birthday", "breed", "imageURL"],
         "properties": {
           "name": {
             "type": "string",
-            "description": "Pets name",
+            "description": "Pet's name",
             "example": "Gori"
           },
           "birthday": {
             "type": "string",
-            "description": "Pets birthday",
+            "description": "Pet's birthday",
             "example": "20.05.2020"
           },
           "breed": {
             "type": "string",
-            "description": "Pets breed",
+            "description": "Pet's breed",
             "example": "huski"
           },
           "comments": {
@@ -1201,11 +1163,10 @@
             "description": "comments",
             "example": "super doggy"
           },
-          "avatar": {
+          "imageURL": {
             "type": "string",
-            "format": "binary",
-            "description": "Pet image",
-            "example": "image.jpeg"
+            "description": "image your pet",
+            "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
           }
         },
         "example": {
@@ -1213,7 +1174,7 @@
           "birthday": "20.05.2020",
           "breed": "huski",
           "comments": "super doggy",
-          "avatar": "image.png"
+          "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
         }
       },
       "AddPetResponse": {
@@ -1288,33 +1249,21 @@
           "id": {
             "type": "string",
             "description": "id deleted pet",
-            "example": "pet with name 'Gogi' has been deleted"
+            "example": "pet has been deleted"
           }
         },
         "example": {
-          "message": "pet with name Gogi has been deleted",
+          "message": "pet has been deleted",
           "id": "63b2f9872ce348bf6f9387b4"
         }
       },
       "GetUserInfoResponse": {
         "type": "object",
         "properties": {
-          "user": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "user id",
-                "example": "63b2b7eebcef138dfe918e73"
-              },
-              "avatarURL": {
-                "type": "string",
-                "description": "User avatar",
-                "example": "//www.gravatar.com/avatar/150e4c9d9deafacee57fb515c28c233e"
-              },
-              "pets": {
+          "pets": {
                 "type": "array",
                 "items": {
+                  "type": "object",
                   "properties": {
                     "_id": {
                       "type": "string",
@@ -1336,7 +1285,7 @@
                       "description": "Pet breed",
                       "example": "huski"
                     },
-                    "avatarURL": {
+                    "imageURL": {
                       "type": "string",
                       "description": "image your pet",
                       "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
@@ -1345,28 +1294,18 @@
                       "type": "string",
                       "description": "comments",
                       "example": "super doggy"
-                    },
-                    "owner": {
-                      "type": "string",
-                      "description": "ID owner this pet",
-                      "example": "63b420f8613598919c6a71a8"
-                    },
-                    "createdAt": {
-                      "type": "string",
-                      "description": "date of creation",
-                      "example": "2023-01-04T09:37:25.604Z"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "date of update",
-                      "example": "2023-01-04T09:37:25.604Z"
-                    }
+                    }                   
                   }
                 }
               },
-              "userInfo": {
+          "user": {
                 "type": "object",
                 "properties": {
+                   "id": {
+                      "type": "string",
+                      "description": "id",
+                      "example": "63b548d5471bb460e28dc813"
+                    },
                   "name": {
                     "type": "string",
                     "description": "User name",
@@ -1391,39 +1330,37 @@
                     "type": "string",
                     "description": "User birthday",
                     "example": ""
-                  }
+                  },
+                   "imageURL": {
+                      "type": "string",
+                      "description": "image your pet",
+                      "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
+                    }
                 }
-              }
             }
-          }
         },
         "example": {
-          "user": {
-            "_id": "63b420f8613598919c6a71a8",
-            "avatarURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1673004097/qplslyemyc1eo8qu7jb0.jpg",
             "pets": [
               {
                 "_id": "63b53c929165e3aafa203876",
                 "name": "Ajaks",
                 "birthday": "02.03.2003",
                 "breed": "haski",
-                "avatarURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672821905/xcljwmjdbyx63x1g3cc7.png",
-                "comments": "adsgadgdagdg",
-                "owner": "63b420f8613598919c6a71a8",
-                "createdAt": "2023-01-04T08:45:06.436Z",
-                "updatedAt": "2023-01-04T08:45:06.436Z"
+                "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672821905/xcljwmjdbyx63x1g3cc7.png",
+                "comments": "adsgadgdagdg"
               }
             ],
-            "userInfo": {
+            "user": {
+              "id": "63b53c929165e3aafa203876",
               "name": "Denis",
               "email": "Vita@gmail.com",
               "city": "lviv, cherson",
               "phone": "+380936945352",
-              "birthday": ""
+              "birthday": "",
+              "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672821905/xcljwmjdbyx63x1g3cc7.png"
             }
           }
-        }
-      },
+        },
       "UpdateUserRequest": {
         "type": "object",
         "properties": {
