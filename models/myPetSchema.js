@@ -10,20 +10,20 @@ const myPetSchema = new Schema({
         type: String,
         required: [true, 'Set name of your pet'],
         minLength: 2,
-      maxLength: 16,
+        maxLength: 16,
     },
-    date: {
+    birthday: {
         type: String,
-        required: true,
+        required: [true, 'Set birthday of your pet'],
         match: dateRegexp,
     },
     breed: {
         type: String,
-        required: true, 
+        required: [true, 'Set breed of your pet'], 
         minLength: 2,
-      maxLength: 16,
+        maxLength: 16,
     },
-    file: {
+     imageURL: {
         type: String,
         required: true,
     },
@@ -31,7 +31,7 @@ const myPetSchema = new Schema({
         type: String,
         required: false,
         minLength: 8,
-      maxLength: 120,
+        maxLength: 120,
     },
     owner: {
         type: Schema.Types.ObjectId,
@@ -53,19 +53,19 @@ const addMyPetSchema = Joi.object({
       'string.empty': `"name" cannot be an empty field`,
       'any.required': `"name" is a required field`
     }),
-    date: Joi.string().required().pattern(dateRegexp).messages({
-      'string.base': `"date" should be a type of 'number'`,
-      'number.empty': `"date" cannot be an empty field`,
-      'any.required': `"date" is a required field`
+    birthday: Joi.string().required().pattern(dateRegexp).messages({
+      'string.base': `"birthday" should be a type of 'number'`,
+      'number.empty': `"birthday" cannot be an empty field`,
+      'any.required': `"birthday" is a required field`
   }),
     breed: Joi.string().required().min(2).max(16).alphanum().messages({
       'string.base': `"breed" should be a type of 'text'`,
       'string.empty': `"breed" cannot be an empty field`,
       'any.required': `"breed" is a required field`
   }),
-  file: Joi.string().required().messages({
-      'string.empty': `"file" cannot be an empty field`,
-      'any.required': `"file" is a required field`
+   imageURL: Joi.string().required().messages({
+      'string.empty': `"imageURL" cannot be an empty field`,
+      'any.required': `"imageURL" is a required field`
   }),
     comments: Joi.string().min(8).max(120).messages({
       'string.base': `"comments" should be a type of 'text'`,
