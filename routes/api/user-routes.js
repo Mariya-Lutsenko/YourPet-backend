@@ -10,8 +10,6 @@ const {
   cloudinaryAddImage,
 } = require("../../middlewares");
 
-// router.get('/', authenticate, controllers.getAllContacts)
-
 router.post(
   "/user/pets",
   authenticate,
@@ -25,6 +23,8 @@ router.delete(
   isValidIdMyPet,
   controllers.removeMyPetById
 );
+
+router.get('/', authenticate, controllers.getAllInfo)
 
 // updating information about users
 router.patch(
