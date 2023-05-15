@@ -11,20 +11,20 @@ const {
 } = require("../../middlewares");
 
 router.post(
-  "/user/pets",
+  "/pets",
   authenticate,
   validateBody(schemas.addMyPetSchema),
   controllers.addMyPet
 );
 
 router.delete(
-  "/user/pets/:id",
+  "/pets/:id",
   authenticate,
   isValidIdMyPet,
   controllers.removeMyPetById
 );
 
-router.get('/current/user/info', authenticate, controllers.getAllInfo)
+router.get('/current/info', authenticate, controllers.getAllInfo)
 
 // updating information about users
 router.patch(
