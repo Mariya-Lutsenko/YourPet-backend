@@ -30,4 +30,18 @@ router.delete(
   notices.deleteOwnNoticesById
 );
 
+router.patch(
+  "/favorite/add/:id",
+  authenticate,
+  isValidIdMyPet,
+  notices.addNoticeToFavorite
+);
+router.patch(
+  "/favorite/remove/:id",
+  authenticate,
+  isValidIdMyPet,
+  notices.removeNoticeFromFavorite
+);
+router.get("/favorite/all", authenticate, notices.getAllFavorite);
+
 module.exports = router;
