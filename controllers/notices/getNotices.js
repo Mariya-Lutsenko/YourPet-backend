@@ -3,9 +3,13 @@ const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
 const getNotices = async (req, res) => {
-  const { category, searchValue } = req.query;
+  const { category, searchValue, page, limit } = req.query;
+  const skip = (page - 1) * limit;
 
-  const allNotices = await Notices.find({ category: category });
+  const allNotices = await Notices.find({ category: category }, "", {
+    skip,
+    limit: Number(limit),
+  });
   if (!allNotices || allNotices.length < 1) {
     throw HttpError(404, `Category ${category}  not found`);
   }
@@ -16,7 +20,7 @@ const getNotices = async (req, res) => {
     );
 
     if (filteredNotices.length < 1) {
-      throw HttpError(404, `Notices with ${searchValue} title not found`);
+      throw HttpError(404, `Notices with "${searchValue}" title not found`);
     }
     res.json(filteredNotices);
   }
