@@ -23,9 +23,10 @@ const myPetSchema = new Schema({
         minLength: 2,
         maxLength: 16,
     },
-     imageURL: {
+    imageURL: {
         type: String,
-        required: true,
+        default:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     },
     comments: {
         type: String,
@@ -48,30 +49,27 @@ myPetSchema.post("save", handleMongooseError)
 const MyPet = model("pet", myPetSchema);
 
 const addMyPetSchema = Joi.object({
-  name: Joi.string().required().min(2).max(16).messages({
-      'string.base': `"name" should be a type of 'text'`,
-      'string.empty': `"name" cannot be an empty field`,
-      'any.required': `"name" is a required field`
+    name: Joi.string().required().min(2).max(16).messages({
+        'string.base': `"name" should be a type of 'text'`,
+        'string.empty': `"name" cannot be an empty field`,
+        'any.required': `"name" is a required field`
     }),
     birthday: Joi.string().required().pattern(dateRegexp).messages({
-      'string.base': `"birthday" should be a type of 'number'`,
-      'number.empty': `"birthday" cannot be an empty field`,
-      'any.required': `"birthday" is a required field`
-  }),
+        'string.base': `"birthday" should be a type of 'number'`,
+        'number.empty': `"birthday" cannot be an empty field`,
+        'any.required': `"birthday" is a required field`
+    }),
     breed: Joi.string().required().min(2).max(16).alphanum().messages({
-      'string.base': `"breed" should be a type of 'text'`,
-      'string.empty': `"breed" cannot be an empty field`,
-      'any.required': `"breed" is a required field`
-  }),
-   imageURL: Joi.string().required().messages({
-      'string.empty': `"imageURL" cannot be an empty field`,
-      'any.required': `"imageURL" is a required field`
-  }),
+        'string.base': `"breed" should be a type of 'text'`,
+        'string.empty': `"breed" cannot be an empty field`,
+        'any.required': `"breed" is a required field`
+    }),
+    imageURL: Joi.string().required().optional(),
     comments: Joi.string().min(8).max(120).messages({
-      'string.base': `"comments" should be a type of 'text'`,
-      'any.required': `"comments" is a required field`
-  })
- })
+        'string.base': `"comments" should be a type of 'text'`,
+        'any.required': `"comments" is a required field`
+    })
+})
  
 const schemas = {
     addMyPetSchema,
