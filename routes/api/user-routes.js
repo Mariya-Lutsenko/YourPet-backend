@@ -8,6 +8,7 @@ const { isValidIdMyPet, authenticate, upload } = require("../../middlewares");
 router.post(
   "/pets",
   authenticate,
+  upload.single("imageURL"),
   validateBody(schemas.addMyPetSchema),
   controllers.addMyPet
 );
