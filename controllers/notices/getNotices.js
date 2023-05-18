@@ -3,30 +3,37 @@ const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
 const getNotices = async (req, res) => {
-  const { category, searchValue, page, limit } = req.query;
+  const { category, searchValue, page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
 
-  const allNotices = await Notices.find({ category: category }, "", {
-    skip,
-    limit: Number(limit),
-  });
-  if (!allNotices || allNotices.length < 1) {
-    throw HttpError(404, `Category ${category}  not found`);
+  let totalPages = 1;
+  if (!searchValue) {
+    const allNotices = await Notices.find({ category });
+    const notices = await Notices.find({ category })
+      .skip(skip)
+      .limit(Number(limit));
+    totalPages =
+      allNotices.length === 0 ? 1 : Math.ceil(allNotices.length / limit);
+    res.status(200).json({ notices, totalPages, page });
   }
 
   if (searchValue) {
-    const filteredNotices = allNotices.filter((notice) =>
-      notice.title.includes(`${searchValue}`)
-    );
+    const allSearchNotices = await Notices.find({
+      category,
+      $text: { $search: searchValue },
+    });
+    const notices = await Notices.find({
+      category,
+      $text: { $search: searchValue },
+    })
+      .skip(skip)
+      .limit(Number(limit));
 
-    if (filteredNotices.length < 1) {
-      throw HttpError(404, `Notices with "${searchValue}" title not found`);
-    }
-    res.json(filteredNotices);
-  }
-
-  if (searchValue === "" || !searchValue) {
-    res.json(allNotices);
+    totalPages =
+      allSearchNotices.length === 0
+        ? 1
+        : Math.ceil(allSearchNotices.length / limit);
+    res.status(200).json({ notices, totalPages, page });
   }
 };
 
