@@ -1,4 +1,4 @@
-const { required } = require("joi");
+// const { required } = require("joi");
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 
@@ -9,7 +9,7 @@ const dateRegexp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 const sexOptions = ["male", "female"];
 
-const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+const nameRegexp = /^[a-zA-Z\s]*$/;
 const breedRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
 const cityRegexp = /^([A-Za-z]+)*$/;
 

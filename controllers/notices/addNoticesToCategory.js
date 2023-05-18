@@ -1,6 +1,6 @@
 const { cloudinaryAddImage } = require("../../middlewares");
 const { Notices } = require("../../models");
-const { ctrlWrapper, cloudinary } = require("../../utils");
+const { ctrlWrapper } = require("../../utils");
 
 const addNoticesToCategory = async (req, res) => {
   const { _id } = req.user;
@@ -12,6 +12,10 @@ const addNoticesToCategory = async (req, res) => {
     owner: _id,
     file: file.secure_url,
   });
+  if (!result) {
+    throw HttpError(400, `Bad request`);
+  }
+
   res.status(201).json(result);
 };
 

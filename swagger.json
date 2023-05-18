@@ -288,6 +288,7 @@
         }
       }
     },
+
     "/user/pets": {
       "post": {
         "tags": ["User"],
@@ -452,6 +453,7 @@
         }
       }
     },
+
     "/notices": {
       "post": {
         "tags": ["Notices"],
@@ -482,15 +484,11 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad Request, required params missed",
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
-            "content": {}
-          },
-          "403": {
-            "description": "Invalid token",
+            "description": "Unauthorized",
             "content": {}
           }
         }
@@ -503,12 +501,12 @@
           {
             "name": "category",
             "in": "query",
-            "description": "Category by notices: [sell, lost, in good hands,'']",
-            "required": false,
+            "description": "Category by notices: [sell, lost-found, for-free,]",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "title",
+            "name": "searchValue",
             "in": "query",
             "description": "search in the title of notices by keyword",
             "required": false,
@@ -1501,14 +1499,15 @@
           }
         }
       },
+
       "NoticeAddRequest": {
         "type": "object",
-        "required": ["category", "title", "sex", "location"],
+        "required": ["category", "title", "date", "breed", "file", "sex", "location"],
         "properties": {
           "category": {
             "type": "string",
-            "description": "Category by notice on of [sell,lost,in good hands]",
-            "example": "Sell"
+            "description": "Category by notice one of [sell,lost-found,for-free]",
+            "example": "sell"
           },
           "title": {
             "type": "string",
@@ -1532,29 +1531,28 @@
           },
           "sex": {
             "type": "string",
-            "description": "Sex list: [male, female]",
-            "example": "female"
+            "description": "Sex one of [male, female]",
+            "example": "male"
           },
           "location": {
             "type": "string",
             "description": "Pet location",
-            "example": "Kyiv,Ukraine"
+            "example": "Kyiv"
           },
           "price": {
             "type": "integer",
             "description": "Price",
             "example": 5000
           },
-          "avatar": {
+          "file": {
             "type": "string",
-            "format": "binary",
             "description": "Pet image",
             "example": "image.jpg"
           },
           "comments": {
             "type": "string",
             "description": "Comments",
-            "example": ""
+            "example": "Selling an awesome puppy"
           }
         },
         "example": {
@@ -1581,7 +1579,7 @@
           "category": {
             "type": "string",
             "description": "Category by notice",
-            "example": "Sell"
+            "example": "sell"
           },
           "title": {
             "type": "string",
@@ -1606,22 +1604,22 @@
           "sex": {
             "type": "string",
             "description": "Sex list: [male, female]",
-            "example": "female"
+            "example": "male"
           },
           "location": {
             "type": "string",
             "description": "Pet location",
-            "example": "Kyiv,Ukraine"
+            "example": "Kyiv"
           },
           "price": {
             "type": "integer",
             "description": "Price",
             "example": 5000
           },
-          "imageURL": {
+          "file": {
             "type": "string",
             "description": "Pet image",
-            "example": "https://via.placeholder.com/300.png/#FDF7F2/#111111"
+            "example": "https://res.cloudinary.com/dqikapfym/image/upload/v1684065959/pzwge8gx8kq3dzy4ksyp.jpg"
           },
           "comments": {
             "type": "string",
@@ -1632,27 +1630,6 @@
             "type": "string",
             "description": "ID owner notices",
             "example": "63b420f8613598919c6a71a8"
-          },
-          "email": {
-            "type": "string",
-            "description": "User email",
-            "example": "test@gmail.com"
-          },
-          "phone": {
-            "type": "string",
-            "description": "User phone",
-            "example": "+380936945352"
-          },
-
-          "createdAt": {
-            "type": "string",
-            "description": "Date of create notice",
-            "example": "2023-01-05T15:28:01.426Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "description": "Date of update notice",
-            "example": "2023-01-05T15:28:01.426Z"
           }
         },
         "example": {
@@ -1662,20 +1639,16 @@
           "name": "Sem",
           "birthday": "02.02.2020",
           "breed": "whiteSnow",
-          "sex": "female",
-          "location": "Kyiv,Ukraine",
+          "sex": "male",
+          "location": "Kyiv",
           "price": 5000,
-          "imageURL": "https://via.placeholder.com/300.png/#FDF7F2/#111111",
+          "imageURL": "https://res.cloudinary.com/dqikapfym/image/upload/v1684065959/pzwge8gx8kq3dzy4ksyp.jpg",
           "comments": "Selling an awesome puppy",
-          "owner": "63b420f8613598919c6a71a8",
-          "email": "Vita@gmail.com",
-          "phone": "+380936945352",
-          "createdAt": "2023-01-05T15:28:01.426Z",
-          "updatedAt": "2023-01-05T15:28:01.426Z"
+          "owner": "63b420f8613598919c6a71a8"
         }
       },
       "GetNoticeByCategoryResponse": {
-        "type": "object",
+        "type": "array",
         "properties": {
           "notices": {
             "type": "array",
@@ -1701,7 +1674,7 @@
                   "description": "Pets name",
                   "example": "Sem"
                 },
-                "birthday": {
+                "date": {
                   "type": "string",
                   "description": "Pets birthday",
                   "example": "02.02.2020"
@@ -1714,22 +1687,22 @@
                 "sex": {
                   "type": "string",
                   "description": "Sex list: [male, female]",
-                  "example": "female"
+                  "example": "male"
                 },
                 "location": {
                   "type": "string",
                   "description": "Pet location",
-                  "example": "Kyiv,Ukraine"
+                  "example": "Kyiv"
                 },
                 "price": {
                   "type": "integer",
                   "description": "Price",
                   "example": 5000
                 },
-                "imageURL": {
+                "file": {
                   "type": "string",
                   "description": "Pet image",
-                  "example": "https://via.placeholder.com/300.png/#FDF7F2/#111111"
+                  "example": "https://res.cloudinary.com/dqikapfym/image/upload/v1684065959/pzwge8gx8kq3dzy4ksyp.jpg"
                 },
                 "comments": {
                   "type": "string",
@@ -1740,21 +1713,11 @@
                   "type": "string",
                   "description": "ID owner notices",
                   "example": "63b420f8613598919c6a71a8"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "description": "Date of create notice",
-                  "example": "2023-01-05T15:28:01.426Z"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "description": "Date of update notice",
-                  "example": "2023-01-05T15:28:01.426Z"
                 }
               }
             }
           },
-          "totalPages": {
+          "totalNotices": {
             "type": "integer",
             "description": "total pages",
             "example": 1
@@ -1767,19 +1730,17 @@
               "category": "lost",
               "title": "Lost big and cool dog",
               "name": "Banny",
-              "birthday": "01.01.2020",
+              "date": "01.01.2020",
               "breed": "shepherd",
               "sex": "male",
-              "location": "Kharkiv, Kharkivska",
+              "location": "Kharkiv",
               "price": 2000,
-              "imageURL": "https://via.placeholder.com/300.png/#FDF7F2/#111111",
+              "imageURL": "https://res.cloudinary.com/dqikapfym/image/upload/v1684065959/pzwge8gx8kq3dzy4ksyp.jpg",
               "comments": "Help me find my sweetheart!",
-              "owner": "63b58e631b6aab70d0834284",
-              "createdAt": "2023-01-04T19:07:09.464Z",
-              "updatedAt": "2023-01-04T19:07:09.464Z"
+              "owner": "63b58e631b6aab70d0834284"
             }
           ],
-          "totalPages": 1
+          "totalNotices": 1
         }
       },
       "AddNoticeToFavoriteResponse": {
