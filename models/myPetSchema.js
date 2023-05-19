@@ -31,7 +31,7 @@ const myPetSchema = new Schema({
         type: String,
         required: false,
         minLength: 8,
-        maxLength: 120,
+        maxLength: 1000,
     },
     owner: {
         type: Schema.Types.ObjectId,
@@ -64,7 +64,7 @@ const addMyPetSchema = Joi.object({
         'any.required': `"breed" is a required field`
     }),
     imageURL: Joi.string().required().optional(),
-    comments: Joi.string().min(8).max(120).messages({
+    comments: Joi.string().min(8).max(1000).messages({
         'string.base': `"comments" should be a type of 'text'`,
         'any.required': `"comments" is a required field`
     })
