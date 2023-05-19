@@ -15,6 +15,7 @@ const getAllOwnNotices = async (req, res) => {
         $text: { $search: searchValue },
         sex,
       });
+
       const notices = await Notices.find({
         owner,
         $text: { $search: searchValue },
@@ -27,6 +28,7 @@ const getAllOwnNotices = async (req, res) => {
         allSearchNotices.length === 0
           ? 1
           : Math.ceil(allSearchNotices.length / limit);
+
       return res.status(200).json({ notices, totalPages, page });
     }
     const allSearchNotices = await Notices.find({

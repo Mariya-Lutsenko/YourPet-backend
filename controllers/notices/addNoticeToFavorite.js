@@ -12,14 +12,17 @@ const addNoticeToFavorite = async (req, res) => {
   }
   if (user.favorite.includes(id)) {
     throw HttpError(
-      400,
+      409,
       `Notices with id "${id}" is already been added to your favorite`
     );
   }
   user.favorite.push(id);
   await user.save();
 
-  res.status(200).json({ message: "successfully added to favorites" });
+  res.status(200).json({
+    id: `${id}`,
+    message: "Successfully added to favorites",
+  });
 };
 
 module.exports = { addNoticeToFavorite: ctrlWrapper(addNoticeToFavorite) };
