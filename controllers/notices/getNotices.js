@@ -8,27 +8,34 @@ const getNotices = async (req, res) => {
 
   let totalPages = 1;
 
-  if (searchValue) {
-    // if (sex) {
-    //   const allSearchNotices = await Notices.find({
-    //     category,
-    //     $text: { $search: searchValue },
-    //     sex,
-    //   });
-    //   const notices = await Notices.find({
-    //     category,
-    //     $text: { $search: searchValue },
-    //     sex,
-    //   })
-    //     .skip(skip)
-    //     .limit(Number(limit));
+  if (!category) {
+    throw HttpError(
+      400,
+      "Missing required parameter of category. Must include sell, lost-found or for-free "
+    );
+  }
 
-    //   totalPages =
-    //     allSearchNotices.length === 0
-    //       ? 1
-    //       : Math.ceil(allSearchNotices.length / limit);
-    //   res.status(200).json({ notices, totalPages, page });
-    // }
+  if (searchValue) {
+    if (sex) {
+      const allSearchNotices = await Notices.find({
+        category,
+        $text: { $search: searchValue },
+        sex,
+      });
+      const notices = await Notices.find({
+        category,
+        $text: { $search: searchValue },
+        sex,
+      })
+        .skip(skip)
+        .limit(Number(limit));
+
+      totalPages =
+        allSearchNotices.length === 0
+          ? 1
+          : Math.ceil(allSearchNotices.length / limit);
+      return res.status(200).json({ notices, totalPages, page });
+    }
     const allSearchNotices = await Notices.find({
       category,
       $text: { $search: searchValue },

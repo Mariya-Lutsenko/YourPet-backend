@@ -13,12 +13,12 @@ const deleteOwnNoticesById = async (req, res) => {
         throw HttpError(404, `Notices with ${id} not found`);
       }
       return res.json({
-        message: "Delete success",
+        id: `${id}`,
+        message: `Notice with id ${id} successfully delete`,
       });
     }
-    console.log("  не довінює");
 
-    throw HttpError(403);
+    throw HttpError(403, "Forbidden. This notis has other user");
   }
   throw HttpError(404, `Notices with ${id} not found`);
 };

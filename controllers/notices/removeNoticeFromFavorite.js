@@ -12,11 +12,13 @@ const removeNoticeFromFavorite = async (req, res) => {
     throw HttpError(404, `User with  id "${id}" not found `);
   }
   if (!user.favorite.includes(id)) {
-    throw HttpError(400, `Notices with id "${id}" not found in your favorite`);
+    throw HttpError(409, `Notices with id "${id}" not found in your favorite`);
   }
   user.favorite.pull(id);
   await user.save();
-  res.status(200).json({ message: "Successfully removed from favorites" });
+  res
+    .status(200)
+    .json({ id: `${id}`, message: "Successfully removed from favorites" });
 };
 
 module.exports = {
