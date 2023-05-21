@@ -1,5 +1,5 @@
 const getCurrent = async (req, res) => {
-  const { _id, name, email, phone, birthday, city, imageURL } = req.user;
+  const { _id, name, email, phone, birthday, city, imageURL, favorite } = req.user;
   res.status(200).json({
     _id,
     email,
@@ -8,6 +8,7 @@ const getCurrent = async (req, res) => {
     birthday,
     city,
     imageURL,
+    favorite,
   });
 };
 
