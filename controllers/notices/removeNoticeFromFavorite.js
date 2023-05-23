@@ -5,8 +5,6 @@ const { ctrlWrapper } = require("../../utils");
 const removeNoticeFromFavorite = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.user;
-  console.log("id оголошення req.params", id);
-  console.log("id авторизованого юзера req.user", _id);
   const user = await User.findById(_id);
   if (!user) {
     throw HttpError(404, `User with  id "${id}" not found `);
