@@ -1,11 +1,11 @@
 const authenticate = require("./authenticate");
 const upload = require("./upload");
-const isValidIdMyPet = require("./isValidIdMyPet");
+const isValidId = require("./isValidId");
 const cloudinaryAddImage = require("./cloudinaryAddImage");
 
 module.exports = {
   authenticate,
   upload,
-  isValidIdMyPet,
+  isValidId,
   cloudinaryAddImage,
 };

@@ -1,11 +1,11 @@
 const { ctrlWrapper } = require('../../utils')
 const { MyPet } = require('../../models')
-const {cloudinaryAddImage} = require('../../middlewares')
+const { cloudinaryAddImage } = require('../../middlewares')
 
 const addMyPet = async (req, res, next) => {
     const { _id: owner } = req.user;
     if (!req.file) {
-        const result = await MyPet.create({...req.body, imageURL: "https://res.cloudinary.com/dzbevpbos/image/upload/v1684493148/default-pets_z1kxoq.jpg", owner})
+        const result = await MyPet.create({...req.body, imageURL: "https://res.cloudinary.com/dzbevpbos/image/upload/v1684832832/default-pets_z1kxoq_elq6gv.png", owner})
         res.status(201).json(result)
     } else {
         const imageURL = await cloudinaryAddImage(req.file.path);

@@ -5,25 +5,24 @@ const { auth: ctrl } = require("../../controllers");
 const { userSchemas } = require("../../models");
 const router = express.Router();
 
-//signup
-
 router.post(
   "/register",
   validateBody(userSchemas.registerSchema),
   ctrlWrapper(ctrl.register)
 );
 
-//signin
 router.post(
   "/login",
   validateBody(userSchemas.loginSchema),
   ctrlWrapper(ctrl.login)
 );
+
 router.post(
   "/refresh",
   validateBody(userSchemas.refreshSchema),
   ctrlWrapper(ctrl.refresh)
 );
+
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
 
 router.post("/logout", authenticate, ctrlWrapper(ctrl.logout));
