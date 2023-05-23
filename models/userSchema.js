@@ -48,7 +48,7 @@ const userSchema = new Schema(
     imageURL: {
       type: String,
       default:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+        "https://res.cloudinary.com/dzbevpbos/image/upload/v1684831673/Photo_default_pzeg2t.png",
     },
     favorite: {
       type: Array,
