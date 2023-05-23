@@ -14,4 +14,4 @@ const addMyPet = async (req, res, next) => {
     }
 }
 
-module.exports = {addMyPet: ctrlWrapper(addMyPet)}
+module.exports = { addMyPet: ctrlWrapper(addMyPet) };
