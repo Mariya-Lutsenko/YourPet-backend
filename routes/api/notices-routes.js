@@ -31,12 +31,14 @@ router.patch(
   isValidId,
   notices.addNoticeToFavorite
 );
+
 router.patch(
   "/favorite/remove/:id",
   authenticate,
   isValidId,
   notices.removeNoticeFromFavorite
 );
+
 router.get("/favorite/all", authenticate, notices.getAllFavorite);
 
 module.exports = router;

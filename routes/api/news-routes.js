@@ -4,4 +4,5 @@ const { news: ctrl } = require("../../controllers");
 const router = express.Router();
 
 router.get("/", ctrlWrapper(ctrl.getNews));
+
 module.exports = router;
