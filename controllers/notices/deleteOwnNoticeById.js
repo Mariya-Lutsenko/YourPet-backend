@@ -3,8 +3,8 @@ const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
 const deleteOwnNoticeById = async (req, res) => {
-  const { id } = req.params; // id notice
-  const { _id } = req.user; // id user
+  const { id } = req.params;
+  const { _id } = req.user;
   const deletedNotices = await Notices.findOneAndDelete({
     _id: id,
     owner: _id,

@@ -23,12 +23,7 @@ router.get("/:id", isValidId, notices.getNoticesById);
 
 router.get("/user/own", authenticate, notices.getAllOwnNotices);
 
-router.delete(
-  "/:id",
-  isValidId,
-  authenticate,
-  notices.deleteOwnNoticesById
-);
+router.delete("/:id", isValidId, authenticate, notices.deleteOwnNoticeById);
 
 router.patch(
   "/favorite/add/:id",
