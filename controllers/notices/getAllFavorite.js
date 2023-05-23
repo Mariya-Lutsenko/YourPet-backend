@@ -1,5 +1,4 @@
-const { HttpError } = require("../../helpers");
-const { Notices, User } = require("../../models");
+const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
 const getAllFavorite = async (req, res) => {

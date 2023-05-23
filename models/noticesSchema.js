@@ -1,14 +1,11 @@
-// const { required } = require("joi");
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
-
 const { handleMongooseError } = require("../utils");
 
 const categories = ["sell", "lost-found", "for-free"];
 const dateRegexp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 const sexOptions = ["male", "female"];
-
 const nameRegexp = /^[a-zA-Z\s]*$/;
 const breedRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
 const cityRegexp = /^([A-Za-z]+)*$/;
@@ -46,7 +43,6 @@ const noticesSchema = new Schema(
       minLength: 2,
       maxLength: 16,
     },
-
     file: {
       type: String,
       required: [true, "Set file for notices"],
@@ -67,7 +63,6 @@ const noticesSchema = new Schema(
       type: Number,
       min: [0],
     },
-
     comments: {
       type: String,
       minLength: 8,
@@ -78,7 +73,6 @@ const noticesSchema = new Schema(
       ref: "user",
     },
   },
-
   { versionKey: false }
 );
 
@@ -123,7 +117,6 @@ const addSchema = Joi.object({
     then: Joi.required(),
     otherwise: Joi.optional(),
   }),
-
   comments: Joi.string().min(8).max(120),
 });
 

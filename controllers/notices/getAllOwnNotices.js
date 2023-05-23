@@ -26,6 +26,4 @@ const getAllOwnNotices = async (req, res) => {
   res.status(200).json({ notices, totalPages, page });
 };
 
-
-
 module.exports = { getAllOwnNotices: ctrlWrapper(getAllOwnNotices) };
