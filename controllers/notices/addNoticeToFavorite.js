@@ -5,7 +5,6 @@ const { ctrlWrapper } = require("../../utils");
 const addNoticeToFavorite = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.user;
-
   const user = await User.findById(_id);
   if (!user) {
     throw HttpError(404, `User with  id "${id}" not found `);
@@ -18,7 +17,6 @@ const addNoticeToFavorite = async (req, res) => {
   }
   user.favorite.push(id);
   await user.save();
-
   res.status(200).json({
     id: `${id}`,
     message: "Successfully added to favorites",

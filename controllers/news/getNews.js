@@ -1,10 +1,8 @@
 const { News } = require("../../models");
-const { HttpError } = require("../../helpers");
 
 const getNews = async (req, res) => {
   const { page = 1, limit = 6, search = "" } = req.query;
   const skip = (page - 1) * limit;
-
   let totalPages = 1;
   if (search === "") {
     const allnews = await News.find({});

@@ -1,9 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const bcrypt = require("bcryptjs");
 const { handleMongooseError } = require("../utils");
 
-// const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
 const nameRegexp = /^[a-zA-Z\s]*$/;
 const emailRegexp =
   /^(?=.{10,63}$)(([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/;

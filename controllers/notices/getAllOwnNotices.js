@@ -1,4 +1,3 @@
-const { HttpError } = require("../../helpers");
 const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
@@ -6,7 +5,6 @@ const getAllOwnNotices = async (req, res) => {
   const { _id: owner } = req.user;
   const { searchValue, page = 1, limit = 10, sex } = req.query;
   const skip = (page - 1) * limit;
-
   let totalPages = 1;
   if (searchValue) {
     if (sex) {
@@ -15,7 +13,6 @@ const getAllOwnNotices = async (req, res) => {
         $text: { $search: searchValue },
         sex,
       });
-
       const notices = await Notices.find({
         owner,
         $text: { $search: searchValue },
