@@ -7,7 +7,7 @@ const { validateBody } = require("../../utils");
 const router = express.Router();
 
 const { schemasNotices } = require("../../models");
-const { authenticate, upload, isValidIdMyPet } = require("../../middlewares");
+const { authenticate, upload, isValidId } = require("../../middlewares");
 
 router.post(
   "/",
@@ -19,13 +19,13 @@ router.post(
 
 router.get("/", notices.getNotices);
 
-router.get("/:id", isValidIdMyPet, notices.getNoticesById);
+router.get("/:id", isValidId, notices.getNoticesById);
 
 router.get("/user/own", authenticate, notices.getAllOwnNotices);
 
 router.delete(
   "/:id",
-  isValidIdMyPet,
+  isValidId,
   authenticate,
   notices.deleteOwnNoticesById
 );
@@ -33,13 +33,13 @@ router.delete(
 router.patch(
   "/favorite/add/:id",
   authenticate,
-  isValidIdMyPet,
+  isValidId,
   notices.addNoticeToFavorite
 );
 router.patch(
   "/favorite/remove/:id",
   authenticate,
-  isValidIdMyPet,
+  isValidId,
   notices.removeNoticeFromFavorite
 );
 router.get("/favorite/all", authenticate, notices.getAllFavorite);
