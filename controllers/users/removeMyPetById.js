@@ -1,9 +1,9 @@
 const { ctrlWrapper } = require("../../utils");
 const { MyPet } = require("../../models");
+const { HttpError } = require("../../helpers")
 
 const removeMyPetById = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   const result = await MyPet.findByIdAndDelete(id);
   if (!result) {
     throw HttpError(404, "Not found");

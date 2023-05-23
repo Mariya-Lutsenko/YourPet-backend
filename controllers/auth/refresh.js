@@ -11,7 +11,6 @@ const refresh = async (req, res) => {
     if (!isExist) {
       throw HttpError(403, "Token invalid");
     }
-
     const payload = {
       id,
     };
@@ -21,7 +20,6 @@ const refresh = async (req, res) => {
     const refreshToken = jwt.sign(payload, REFRESH_JWT_SECRET, {
       expiresIn: "7d",
     });
-
     res.status(200).json({
       accessToken,
       refreshToken,
@@ -30,4 +28,5 @@ const refresh = async (req, res) => {
     throw HttpError(403, error.message);
   }
 };
+
 module.exports = refresh;

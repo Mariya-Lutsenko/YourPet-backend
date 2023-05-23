@@ -6,15 +6,11 @@ const getAllFavorite = async (req, res) => {
   const { _id } = req.user;
   const { searchValue, page = 1, limit = 10, sex } = req.query;
   const skip = (page - 1) * limit;
-
   const user = await User.findOne({ _id });
-
   if (!user) {
     throw new HttpError(404, "User not found");
   }
-
   let totalPages = 1;
-
   if (searchValue) {
     if (sex) {
       const allFavoriteNotices = await Notices.find({

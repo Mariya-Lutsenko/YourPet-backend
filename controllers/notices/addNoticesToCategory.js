@@ -4,9 +4,7 @@ const { ctrlWrapper } = require("../../utils");
 
 const addNoticesToCategory = async (req, res) => {
   const { _id } = req.user;
-
   const file = await cloudinaryAddImage(req.file.path);
-
   const result = await Notices.create({
     ...req.body,
     owner: _id,
@@ -15,7 +13,6 @@ const addNoticesToCategory = async (req, res) => {
   if (!result) {
     throw HttpError(400, `Bad request`);
   }
-
   res.status(201).json(result);
 };
 

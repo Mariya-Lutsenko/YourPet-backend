@@ -5,16 +5,15 @@ const { ctrlWrapper } = require("../../utils");
 const getNotices = async (req, res) => {
   const { category, searchValue, page = 1, limit = 10, sex } = req.query;
   const skip = (page - 1) * limit;
-
   let totalPages = 1;
-
+ 
   if (!category) {
     throw HttpError(
       400,
       "Missing required parameter of category. Must include sell, lost-found or for-free "
     );
   }
-
+ 
   if (searchValue) {
     if (sex) {
       const allSearchNotices = await Notices.find({

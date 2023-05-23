@@ -17,7 +17,6 @@ const deleteOwnNoticesById = async (req, res) => {
         message: `Notice with id ${id} successfully delete`,
       });
     }
-
     throw HttpError(403, "Forbidden. This notis has other user");
   }
   throw HttpError(404, `Notices with ${id} not found`);
