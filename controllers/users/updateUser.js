@@ -1,16 +1,8 @@
-const { User, userSchemas } = require("../../models");
+const { User } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const { cloudinaryAddImage } = require("../../middlewares");
 
 const updateUser = async (req, res) => {
-  const { updateUserSchema } = userSchemas;
-  const { imageURL, name, email, birthday, phone, city } = req.body;
-  const { error } = updateUserSchema.validate(req.body);
- 
-  if (error) {
-    error.status = 400;
-    throw error;
-  }
   const { _id } = req.user;
 
   let updatedFields = { ...req.body };
@@ -19,11 +11,9 @@ const updateUser = async (req, res) => {
     updatedFields.imageURL = imageURL.secure_url;
   }
 
-  const user = await User.findByIdAndUpdate(
-    _id,
-    updatedFields,
-    { new: true }
-  ).select("-accessToken -refreshToken -createdAt -password -updatedAt");
+  const user = await User.findByIdAndUpdate(_id, updatedFields, {
+    new: true,
+  }).select("-accessToken -refreshToken -createdAt -password -updatedAt");
 
   res.status(200).json({
     user: {
