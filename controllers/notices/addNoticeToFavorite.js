@@ -15,7 +15,7 @@ const addNoticeToFavorite = async (req, res) => {
       `Notices with id "${id}" is already been added to your favorite`
     );
   }
-  user.favorite.push(id);
+  user.favorite.unshift(id);
   await user.save();
   res.status(200).json({
     id: `${id}`,

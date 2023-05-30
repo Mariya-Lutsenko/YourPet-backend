@@ -1,7 +1,7 @@
 const { cloudinaryAddImage } = require("../../middlewares");
 const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
-const { HttpError } = require("../../helpers")
+const { HttpError } = require("../../helpers");
 
 const createNotice = async (req, res) => {
   const { _id } = req.user;
