@@ -73,7 +73,7 @@ const noticesSchema = new Schema(
       ref: "user",
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 noticesSchema.post("save", handleMongooseError);

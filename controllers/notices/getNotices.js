@@ -24,7 +24,7 @@ const getNotices = async (req, res) => {
   }
 
   const [notices, totalNotices] = await Promise.all([
-    Notices.find(query).skip(skip).limit(Number(limit)),
+    Notices.find(query).skip(skip).limit(Number(limit)).sort({ createdAt: -1 }),
     Notices.countDocuments(query),
   ]);
 
